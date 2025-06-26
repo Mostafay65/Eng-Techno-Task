@@ -1,8 +1,9 @@
 import React from "react";
 import imageSrc from "../assets/image.png";
+import { Link } from "react-router-dom";
 const AudioCard = () => {
     return (
-        <div className="bg-white rounded-3xl border-2 border-[#E6E8EB] p-4 flex ">
+        <Link to="/Podcast" className="bg-white rounded-3xl border-2 border-[#E6E8EB] p-4 flex ">
             <img src={imageSrc} alt="Post thumbnail" className="w-44 h-44 rounded-3xl object-cover" />
             <div className="w-full h-full px-5 flex flex-col justify-around">
                 <h3 className="text-2xl font-semibold text-[#494D4B]">O que é um bom código?</h3>
@@ -27,7 +28,7 @@ const AudioCard = () => {
                     </button>
                 </div>
             </div>
-        </div>
+        </Link>
     );
 };
 

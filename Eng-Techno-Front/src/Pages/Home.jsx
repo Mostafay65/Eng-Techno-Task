@@ -6,8 +6,7 @@ import AudioTable from "../Components/AudioTable";
 const Home = () => {
     return (
         <div>
-            <NaveBar />
-            <div className="container mx-auto p-15">
+            <div className="container mx-auto p-15 mt-25">
                 <h1 className="text-3xl font-bold mb-4 text-[#494D4B]">Últimos lançamentos</h1>
                 <div className="grid  lg:grid-cols-2  gap-10">
                     <AudioCard />

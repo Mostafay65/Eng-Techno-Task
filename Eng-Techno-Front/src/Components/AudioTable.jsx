@@ -1,5 +1,8 @@
-import React from "react";
+import React, { useEffect, useContext } from "react";
 import imageSrc from "../assets/image.png";
+import { Link, useNavigate } from "react-router-dom";
+import { AudioContext } from "../Context/AudioContext";
+
 const PodcastItem = ({ imageSrc, title, authors, date, duration }) => {
     return (
         <div className="flex items-center space-x-4 p-2 hover:bg-gray-100">
@@ -20,43 +23,9 @@ const PodcastItem = ({ imageSrc, title, authors, date, duration }) => {
 };
 
 const AudioTable = () => {
-    const podcasts = [
-        {
-            imageSrc,
-            title: "A vida é boa",
-            authors: "Tiago, Diego e Pellizzetti",
-            date: "8 Jan 21",
-            duration: "1:35:18",
-        },
-        {
-            imageSrc,
-            title: "Como programar like a god",
-            authors: "Maria, Tiago e Samuel",
-            date: "7 Jan 21",
-            duration: "35:40",
-        },
-        {
-            imageSrc,
-            title: "Bora viver!",
-            authors: "Diego e Richard",
-            date: "12 Feb 21",
-            duration: "54:27",
-        },
-        {
-            imageSrc,
-            title: "Não desista de você",
-            authors: "Pelpas, Pulii, Pepe e Pupa",
-            date: "24 Mar 21",
-            duration: "1:27:11",
-        },
-        {
-            imageSrc,
-            title: "A vida é incrível",
-            authors: "B1 e B2 descendo as escadas",
-            date: "25 Mar 21",
-            duration: "1:35:18",
-        },
-    ];
+    const navigate = useNavigate();
+    const { selectedIndex, setSelectedIndex } = useContext(AudioContext);
+    const { podcasts } = useContext(AudioContext);
 
     return (
         <table className="w-full rounded-lg">
@@ -70,7 +39,14 @@ const AudioTable = () => {
             </thead>
             <tbody>
                 {podcasts.map((podcast, index) => (
-                    <tr key={index} className="border-b border-[#E6E8EB] hover:bg-gray-100 transition-all duration-200">
+                    <tr
+                        key={index}
+                        className="border-b border-[#E6E8EB] hover:bg-gray-100 transition-all duration-200 cursor-pointer"
+                        onClick={() => {
+                            setSelectedIndex(index);
+                            navigate(`/Podcast`);
+                        }}
+                    >
                         <td className="p-2 flex gap-5 items-center text-lg font-medium text-[#494D4B]">
                             <div className="w-15 h-15 rounded">
                                 <img src={podcast.imageSrc} alt={podcast.title} className="w-15 h-15 rounded-xl object-cover" />
@@ -81,11 +57,26 @@ const AudioTable = () => {
                         <td className="p-2 text-sm text-[#808080]">{podcast.date}</td>
                         <td className="p-2 text-sm text-[#808080]">{podcast.duration}</td>
                         <td className="p-2">
-                            <button className="rounded-full cursor-pointer w-10 h-10 flex items-center justify-center">
+                            <button
+                                onClick={(event) => {
+                                    event.stopPropagation();
+                                    setSelectedIndex(index);
+                                }}
+                                className="rounded-full cursor-pointer w-10 h-10 flex items-center justify-center hover:bg-green-600 transition-colors duration-200"
+                            >
                                 <svg width="40" height="40" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <rect x="0.5" y="0.5" width="31" height="31" rx="7.5" fill="#F7F8FA" stroke="#E6E8EB" />
-                                    <g clip-path="url(#clip0_83_240)">
-                                        <path d="M12.6666 10.1666V21.8333L21.8333 16L12.6666 10.1666Z" fill="#04D361" />
+                                    <g clipPath="url(#clip0_83_240)">
+                                        {selectedIndex !== index && (
+                                            <path d="M12.6666 10.1666V21.8333L21.8333 16L12.6666 10.1666Z" fill="#04D361" />
+                                        )}
+
+                                        {selectedIndex === index && (
+                                            <>
+                                                <rect x="11" y="10" width="3" height="12" rx="0.5" fill="#04D361" />
+                                                <rect x="18" y="10" width="3" height="12" rx="0.5" fill="#04D361" />
+                                            </>
+                                        )}
                                     </g>
                                     <defs>
                                         <clipPath id="clip0_83_240">
