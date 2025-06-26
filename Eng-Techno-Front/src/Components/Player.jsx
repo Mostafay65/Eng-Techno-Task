@@ -3,7 +3,7 @@ import audioFile from "../assets/audio.mp3";
 import { AudioContext } from "../Context/AudioContext";
 
 const Player = () => {
-    const { selectedIndex, setSelectedIndex } = useContext(AudioContext); // Get selectedIndex from context
+    const { selectedIndex, setSelectedIndex } = useContext(AudioContext);
     const { podcasts } = useContext(AudioContext);
     const [isPlaying, setIsPlaying] = useState(false);
     const [progress, setProgress] = useState(0);
@@ -23,7 +23,6 @@ const Player = () => {
             audioRef.current.onended = () => {
                 setProgress(0);
                 setIsPlaying(false);
-                // setSelectedIndex(-1);
                 setSelectedIndex((selectedIndex + 1) % podcasts.length);
             };
 
@@ -100,7 +99,7 @@ const Player = () => {
 
         document.addEventListener("keydown", handleKeyPress);
         return () => document.removeEventListener("keydown", handleKeyPress);
-    }, [selectedIndex, isPlaying]); // Only dependencies needed for key handling
+    }, [selectedIndex, isPlaying]); 
 
     const playAudio = () => {
         audioRef.current.play();

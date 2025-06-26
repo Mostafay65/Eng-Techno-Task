@@ -4,9 +4,9 @@ import { Link } from "react-router-dom";
 const AudioCard = () => {
     return (
         <Link to="/Podcast" className="bg-white rounded-3xl border-2 border-[#E6E8EB] p-4 flex ">
-            <img src={imageSrc} alt="Post thumbnail" className="w-44 h-44 rounded-3xl object-cover" />
+            <img src={imageSrc} alt="Post thumbnail" className="w-30 h-30 rounded-3xl object-cover" />
             <div className="w-full h-full px-5 flex flex-col justify-around">
-                <h3 className="text-2xl font-semibold text-[#494D4B]">O que é um bom código?</h3>
+                <h3 className="text-2xl lg:text-xl font-semibold text-[#494D4B]">O que é um bom código?</h3>
 
                 <div className="w-full flex justify-between">
                     <div className="text-lg">
