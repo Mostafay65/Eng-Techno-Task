@@ -1,18 +1,55 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import ButtonLoader from "../Components/ButtonLoader";
+import { AudioContext } from "../Context/AudioContext";
+import axios from "axios";
 
 const PodcastForm = () => {
     const [title, setTitle] = useState("");
     const [authors, setAuthors] = useState("");
-    const [date, setDate] = useState("");
-    const [duration, setDuration] = useState("");
+    const [description, setDescription] = useState("");
     const [image, setImage] = useState(null);
     const [audio, setAudio] = useState(null);
+    const [errors, setErrors] = useState("");
+    const { podcasts, setPodcasts, fetchPodcasts } = useContext(AudioContext);
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const navigate = useNavigate();
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        // Handle form submission logic here (e.g., API call)
-        console.log({ title, authors, date, duration, image, audio });
+        setIsSubmitting(true);
+
+        try {
+            const formData = new FormData();
+            formData.append("title", title);
+            formData.append("author", authors);
+            formData.append("description", description);
+            formData.append("image", image);
+            formData.append("audio", audio);
+
+            const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/api/podcasts`, formData, {
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                },
+            });
+
+            if (response.status === 201) {
+                setTitle("");
+                setAuthors("");
+                setDescription("");
+                setImage(null);
+                setAudio(null);
+                fetchPodcasts();
+
+                navigate("/");
+            } else {
+                console.error("Error submitting form:", response);
+            }
+        } catch (error) {
+            setErrors(error.response.data.message);
+        } finally {
+            setIsSubmitting(false);
+        }
     };
 
     return (
@@ -34,6 +71,7 @@ const PodcastForm = () => {
 
             <div className="bg-white rounded-3xl border-2 border-[#E6E8EB] p-6 max-w-2xl mx-auto mt-20">
                 <h2 className="text-2xl font-semibold text-[#494D4B] mb-6">Criar Novo Podcast</h2>
+                <h2 className="text-sm font-semibold text-red-500 mb-2">{errors}</h2>
                 <form onSubmit={handleSubmit} className="space-y-6">
                     <div>
                         <label className="block text-sm font-medium text-[#494D4B] mb-2">Título</label>
@@ -56,23 +94,13 @@ const PodcastForm = () => {
                         />
                     </div>
                     <div>
-                        <label className="block text-sm font-medium text-[#494D4B] mb-2">Data</label>
+                        <label className="block text-sm font-medium text-[#494D4B] mb-2">Descrição</label>
                         <input
                             type="text"
-                            value={date}
-                            onChange={(e) => setDate(e.target.value)}
+                            value={description}
+                            onChange={(e) => setDescription(e.target.value)}
                             className="w-full p-3 border-2 border-[#E6E8EB] rounded-2xl text-[#808080] focus:outline-none focus:border-[#04D361]"
-                            placeholder="Ex: 8 Jan 21"
-                        />
-                    </div>
-                    <div>
-                        <label className="block text-sm font-medium text-[#494D4B] mb-2">Duração</label>
-                        <input
-                            type="text"
-                            value={duration}
-                            onChange={(e) => setDuration(e.target.value)}
-                            className="w-full p-3 border-2 border-[#E6E8EB] rounded-2xl text-[#808080] focus:outline-none focus:border-[#04D361]"
-                            placeholder="Ex: 1:35:18"
+                            placeholder="Digite a descrição"
                         />
                     </div>
                     <div>
@@ -81,7 +109,7 @@ const PodcastForm = () => {
                             type="file"
                             accept="image/*"
                             onChange={(e) => setImage(e.target.files[0])}
-                            className="w-full p-3 border-2 border-[#E6E8EB] rounded-2xl text-[#808080] focus:outline-none"
+                            className="w-full p-3 border-2 border-[#E6E8EB] rounded-2xl text-[#808080] focus:outline-none cursor-pointer"
                         />
                     </div>
                     <div>
@@ -90,23 +118,27 @@ const PodcastForm = () => {
                             type="file"
                             accept="audio/*"
                             onChange={(e) => setAudio(e.target.files[0])}
-                            className="w-full p-3 border-2 border-[#E6E8EB] rounded-2xl text-[#808080] focus:outline-none"
+                            className="w-full p-3 border-2 border-[#E6E8EB] rounded-2xl text-[#808080] focus:outline-none cursor-pointer"
                         />
                     </div>
                     <button
                         type="submit"
+                        disabled={isSubmitting}
                         className="bg-green-500 text-white rounded-2xl w-32 h-12 flex items-center justify-center hover:bg-green-600 transition-colors duration-200"
                     >
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="M5 13l4 4L19 7"
-                                stroke="white"
-                                strokeWidth="2"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                            />
-                        </svg>
-                        Criar
+                        {isSubmitting && <ButtonLoader />}
+                        {!isSubmitting && (
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M5 13l4 4L19 7"
+                                    stroke="white"
+                                    strokeWidth="2"
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                />
+                            </svg>
+                        )}
+                        <span className="pl-3">Criar</span>
                     </button>
                 </form>
             </div>

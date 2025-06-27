@@ -60,8 +60,8 @@ const Home = () => {
                         </div>
 
                         <div className="grid  lg:grid-cols-2  gap-5">
-                            <AudioCard podcast={podcasts[0]} index={0} />
-                            <AudioCard podcast={podcasts[1]} index={1} />
+                            <AudioCard podcast={podcasts[podcasts.length - 1]} index={podcasts.length - 1} />
+                            <AudioCard podcast={podcasts[podcasts.length - 2]} index={podcasts.length - 2} />
                         </div>
                     </div>
                     <div className="container mx-auto p-15">

@@ -13,6 +13,25 @@ const Podcast = () => {
     const {} = useContext(AudioContext);
     const navigate = useNavigate();
 
+    const getAudioDuration = (audioUrl) => {
+        return new Promise((resolve) => {
+            const audio = new Audio(audioUrl);
+            audio.addEventListener("loadedmetadata", () => {
+                resolve(audio.duration);
+            });
+            audio.addEventListener("error", () => {
+                console.warn("Could not load audio metadata:", audioUrl);
+                resolve(0); // fallback duration
+            });
+        });
+    };
+
+    const formatDuration = (durationInSeconds) => {
+        const minutes = Math.floor(durationInSeconds / 60);
+        const seconds = Math.floor(durationInSeconds % 60);
+        return `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
+    };
+
     const deletePodcast = async () => {
         setIsDeleting(true);
         try {
@@ -39,7 +58,9 @@ const Podcast = () => {
                 setIsLoading(true);
                 const response = await fetch(`${import.meta.env.VITE_BASE_URL}/api/podcasts/${id}`);
                 const data = await response.json();
-                console.log(data);
+
+                const durationInSeconds = await getAudioDuration(data.data.audio);
+
                 setPodcast({
                     id: data.data._id,
                     title: data.data.title,
@@ -49,7 +70,7 @@ const Podcast = () => {
                         month: "short",
                         year: "2-digit",
                     }).format(new Date(data.data.createdAt)),
-                    duration: "00:01",
+                    duration: formatDuration(durationInSeconds),
                     imageSrc: data.data.image,
                     audioSrc: data.data.audio,
                     description: data.data.description,
