@@ -14,3 +14,5 @@ mongoose.connection.once("open", () => {
         console.log(`Server listening on port ${PORT}.`);
     });
 });
+
+export default app;
