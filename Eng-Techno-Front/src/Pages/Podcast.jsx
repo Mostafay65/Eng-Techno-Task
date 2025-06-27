@@ -32,8 +32,29 @@ const Podcast = () => {
             </div>
             <div className="w-[80%] mx-auto mt-10 p-5">
                 <div className="text-5xl font-sans text-[#494D4B] py-5">Como começar na programação em 2021 do jeito certo</div>
-                <div className="flex items-center gap-5 text-[#808080] text-lg py-5">
-                    <span>Diego e Richard</span> • <span>8 Jan 21</span> • <span>35:40</span>
+                <div className="flex items-center justify-between text-[#808080] text-lg py-5 pr-5">
+                    <div className="flex items-center gap-4">
+                        <span>Diego e Richard</span> • <span>8 Jan 21</span> • <span>35:40</span>
+                    </div>
+                    <button className="bg-red-500 p-3 rounded-xl cursor-pointer hover:bg-red-400 hover:shadow-lg transition-all duration-300 ">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="24"
+                            height="24"
+                            fill="none"
+                            stroke="white"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            class="feather feather-trash"
+                        >
+                            <polyline points="3 6 5 6 21 6" />
+                            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6" />
+                            <path d="M10 11v6" />
+                            <path d="M14 11v6" />
+                            <path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2" />
+                        </svg>
+                    </button>
                 </div>
                 <hr className="w-[80%] mx-auto text-[#E6E8EB]" />
                 <div className="text-[#808080] text-lg py-5">
