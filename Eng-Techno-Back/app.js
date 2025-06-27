@@ -10,7 +10,7 @@ import podcastRoutes from "./routes/podcast.routes.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
-export const app = express();
+const app = express();
 
 app.use(cors(corsOptions));
 app.use(cookieParser());
@@ -28,3 +28,5 @@ app.all("/", (req, res, next) => {
 
 // Manage all errors
 app.use(globalErrorHandler);
+
+export default app;
