@@ -24,8 +24,7 @@ const PodcastItem = ({ imageSrc, title, authors, date, duration }) => {
 
 const AudioTable = () => {
     const navigate = useNavigate();
-    const { selectedIndex, setSelectedIndex } = useContext(AudioContext);
-    const { podcasts } = useContext(AudioContext);
+    const { selectedIndex, setSelectedIndex, podcasts } = useContext(AudioContext);
 
     return (
         <table className="w-full rounded-lg">
@@ -44,14 +43,14 @@ const AudioTable = () => {
                         className="border-b border-[#E6E8EB] hover:bg-gray-100 transition-all duration-200 cursor-pointer"
                         onClick={() => {
                             setSelectedIndex(index);
-                            navigate(`/Podcast`);
+                            navigate(`/Podcast/${podcast.id}`);
                         }}
                     >
                         <td className="p-2 flex gap-5 items-center text-lg font-medium text-[#494D4B]">
                             <div className="w-15 h-15 rounded">
                                 <img src={podcast.imageSrc} alt={podcast.title} className="w-15 h-15 rounded-xl object-cover" />
                             </div>
-                            <h1>{podcast.title}</h1>
+                            <h1>{podcast.title.substr(0, 20)}....</h1>
                         </td>
                         <td className="p-2 text-sm text-[#808080]">{podcast.authors}</td>
                         <td className="p-2 text-sm text-[#808080]">{podcast.date}</td>

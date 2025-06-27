@@ -17,7 +17,7 @@ function App() {
                     element: <Home />,
                 },
                 {
-                    path: "/Podcast",
+                    path: "/Podcast/:id",
                     element: <Podcast />,
                 },
             ],

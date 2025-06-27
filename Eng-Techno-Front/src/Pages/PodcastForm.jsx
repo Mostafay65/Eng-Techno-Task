@@ -25,9 +25,9 @@ const PodcastForm = () => {
                     <path
                         d="M8.33325 1.33329L1.66659 7.99996L8.33325 14.6666"
                         stroke="white"
-                        stroke-width="3"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
+                        strokeWidth="3"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
                     />
                 </svg>
             </Link>

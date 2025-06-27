@@ -8,7 +8,7 @@ export const Layout = () => {
         <>
             <div className="grid grid-cols-6">
                 <div className="col-span-4">
-                    <div className="fixed w-4/6">
+                    <div className="fixed w-4/6 z-1">
                         <NaveBar />
                     </div>
                     <Outlet />

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const NaveBar = () => {
     return (
-        <div className="w-full px-20 py-10 flex bg-white ">
+        <div className="w-full px-20 py-10 flex bg-white z-50 ">
             <Link to={"/"} className="flex items-center pr-10">
                 <svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path

@@ -1,5 +1,4 @@
 import React, { useState, useRef, useEffect, useContext } from "react";
-import audioFile from "../assets/audio.mp3";
 import { AudioContext } from "../Context/AudioContext";
 
 const Player = () => {
@@ -18,7 +17,7 @@ const Player = () => {
 
     useEffect(() => {
         if (selectedIndex !== -1 && podcasts[selectedIndex]) {
-            audioRef.current = new Audio(podcasts[selectedIndex].audio);
+            audioRef.current = new Audio(podcasts[selectedIndex].audioSrc);
 
             audioRef.current.onended = () => {
                 setProgress(0);
@@ -99,7 +98,7 @@ const Player = () => {
 
         document.addEventListener("keydown", handleKeyPress);
         return () => document.removeEventListener("keydown", handleKeyPress);
-    }, [selectedIndex, isPlaying]); 
+    }, [selectedIndex, isPlaying, podcasts]);
 
     const playAudio = () => {
         audioRef.current.play();
