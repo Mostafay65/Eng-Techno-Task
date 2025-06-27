@@ -1,6 +1,5 @@
 import Podcast from "../models/podcast.model.js";
 import filterBody from "../utilities/filterBody.js";
-import { getAudioDurationInSeconds } from "get-audio-duration";
 import AppError from "../utilities/appError.js";
 import catchAsync from "../utilities/catchAsync.js";
 
@@ -17,13 +16,10 @@ export const createPodcast = catchAsync(async (req, res, next) => {
     const imageUrl = req.files.image[0].path;
     const audioUrl = req.files.audio[0].path;
 
-    const duration = await getAudioDurationInSeconds(audioUrl);
-
     const podcast = await Podcast.create({
         ...filteredBody,
         image: imageUrl,
         audio: audioUrl,
-        duration,
     });
     res.status(201).json({ status: "success", data: podcast });
 });

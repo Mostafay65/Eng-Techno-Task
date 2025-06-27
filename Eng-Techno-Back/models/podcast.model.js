@@ -18,10 +18,6 @@ const podcastSchema = new mongoose.Schema(
             type: String,
             required: [true, "Podcast must have an image."],
         },
-        duration: {
-            type: Number,
-            required: [true, "Podcast must have a duration."],
-        },
         description: {
             type: String,
             required: [true, "Podcast must have a description."],
