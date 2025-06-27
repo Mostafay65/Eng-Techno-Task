@@ -1,5 +1,4 @@
 import React, { useEffect, useContext } from "react";
-import imageSrc from "../assets/image.png";
 import { Link, useNavigate } from "react-router-dom";
 import { AudioContext } from "../Context/AudioContext";
 

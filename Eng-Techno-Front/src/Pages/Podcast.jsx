@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useState } from "react";
-import podcastImg from "../assets/podcast.png";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import { AudioContext } from "../Context/AudioContext";
 import Loader from "../Components/Loader";
