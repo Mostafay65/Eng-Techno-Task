@@ -56,9 +56,9 @@ const PodcastForm = () => {
         <>
             <Link
                 to={"/"}
-                className="absolute top-20 left-20 w-22 h-22 bg-[#8257E5] rounded-3xl flex items-center justify-center"
+                className="absolute top-4 lg:top-20 left-4 lg:left-20 w-12 h-12 lg:w-22 lg:h-22 bg-[#8257E5] rounded-2xl lg:rounded-3xl flex items-center justify-center"
             >
-                <svg width="20" height="26" viewBox="0 0 10 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg width="16" height="20" lg:w-20 lg:h-26 viewBox="0 0 10 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
                         d="M8.33325 1.33329L1.66659 7.99996L8.33325 14.6666"
                         stroke="white"
@@ -69,17 +69,17 @@ const PodcastForm = () => {
                 </svg>
             </Link>
 
-            <div className="bg-white rounded-3xl border-2 border-[#E6E8EB] p-6 max-w-2xl mx-auto mt-20">
-                <h2 className="text-2xl font-semibold text-[#494D4B] mb-6">Criar Novo Podcast</h2>
+            <div className="bg-white rounded-2xl lg:rounded-3xl border-2 border-[#E6E8EB] p-4 lg:p-6 max-w-2xl mx-auto mt-16 lg:mt-20 mx-4 lg:mx-auto">
+                <h2 className="text-xl lg:text-2xl font-semibold text-[#494D4B] mb-4 lg:mb-6">Criar Novo Podcast</h2>
                 <h2 className="text-sm font-semibold text-red-500 mb-2">{errors}</h2>
-                <form onSubmit={handleSubmit} className="space-y-6">
+                <form onSubmit={handleSubmit} className="space-y-4 lg:space-y-6">
                     <div>
                         <label className="block text-sm font-medium text-[#494D4B] mb-2">Título</label>
                         <input
                             type="text"
                             value={title}
                             onChange={(e) => setTitle(e.target.value)}
-                            className="w-full p-3 border-2 border-[#E6E8EB] rounded-2xl text-[#808080] focus:outline-none focus:border-[#04D361]"
+                            className="w-full p-3 border-2 border-[#E6E8EB] rounded-xl lg:rounded-2xl text-[#808080] focus:outline-none focus:border-[#04D361]"
                             placeholder="Digite o título"
                         />
                     </div>
@@ -89,7 +89,7 @@ const PodcastForm = () => {
                             type="text"
                             value={authors}
                             onChange={(e) => setAuthors(e.target.value)}
-                            className="w-full p-3 border-2 border-[#E6E8EB] rounded-2xl text-[#808080] focus:outline-none focus:border-[#04D361]"
+                            className="w-full p-3 border-2 border-[#E6E8EB] rounded-xl lg:rounded-2xl text-[#808080] focus:outline-none focus:border-[#04D361]"
                             placeholder="Digite os autores"
                         />
                     </div>
@@ -99,7 +99,7 @@ const PodcastForm = () => {
                             type="text"
                             value={description}
                             onChange={(e) => setDescription(e.target.value)}
-                            className="w-full p-3 border-2 border-[#E6E8EB] rounded-2xl text-[#808080] focus:outline-none focus:border-[#04D361]"
+                            className="w-full p-3 border-2 border-[#E6E8EB] rounded-xl lg:rounded-2xl text-[#808080] focus:outline-none focus:border-[#04D361]"
                             placeholder="Digite a descrição"
                         />
                     </div>
@@ -109,7 +109,7 @@ const PodcastForm = () => {
                             type="file"
                             accept="image/*"
                             onChange={(e) => setImage(e.target.files[0])}
-                            className="w-full p-3 border-2 border-[#E6E8EB] rounded-2xl text-[#808080] focus:outline-none cursor-pointer"
+                            className="w-full p-3 border-2 border-[#E6E8EB] rounded-xl lg:rounded-2xl text-[#808080] focus:outline-none cursor-pointer"
                         />
                     </div>
                     <div>
@@ -118,17 +118,25 @@ const PodcastForm = () => {
                             type="file"
                             accept="audio/*"
                             onChange={(e) => setAudio(e.target.files[0])}
-                            className="w-full p-3 border-2 border-[#E6E8EB] rounded-2xl text-[#808080] focus:outline-none cursor-pointer"
+                            className="w-full p-3 border-2 border-[#E6E8EB] rounded-xl lg:rounded-2xl text-[#808080] focus:outline-none cursor-pointer"
                         />
                     </div>
                     <button
                         type="submit"
                         disabled={isSubmitting}
-                        className="bg-green-500 text-white rounded-2xl w-32 h-12 flex items-center justify-center hover:bg-green-600 transition-colors duration-200"
+                        className="bg-green-500 text-white rounded-xl lg:rounded-2xl w-full lg:w-32 h-12 flex items-center justify-center hover:bg-green-600 transition-colors duration-200"
                     >
                         {isSubmitting && <ButtonLoader />}
                         {!isSubmitting && (
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <svg
+                                width="20"
+                                height="20"
+                                lg:w-24
+                                lg:h-24
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                            >
                                 <path
                                     d="M5 13l4 4L19 7"
                                     stroke="white"

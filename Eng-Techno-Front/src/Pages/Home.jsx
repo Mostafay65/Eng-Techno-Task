@@ -31,15 +31,23 @@ const Home = () => {
             {isPodcastsLoading ? (
                 <Loader />
             ) : (
-                <div>
-                    <div className="container mx-auto p-15 mt-25">
-                        <div className="flex items-center justify-between mb-10">
-                            <h1 className="text-3xl font-bold mb-4 text-[#494D4B]">Últimos lançamentos</h1>
+                <div className="pb-20 lg:pb-0">
+                    <div className="container mx-auto p-4 lg:p-15 mt-4 lg:mt-25">
+                        <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between mb-6 lg:mb-10 gap-4">
+                            <h1 className="text-2xl lg:text-3xl font-bold text-[#494D4B]">Últimos lançamentos</h1>
                             <Link
                                 to={"/Podcast/new"}
-                                className="bg-[#04D361] rounded-2xl py-3 px-6 text-white font-sans cursor-pointer flex items-center gap-2 hover:bg-[#04D361]/90 transition-colors"
+                                className="bg-[#04D361] rounded-2xl py-3 px-6 text-white font-sans cursor-pointer flex items-center gap-2 hover:bg-[#04D361]/90 transition-colors w-fit"
                             >
-                                <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <svg
+                                    width="24"
+                                    height="24"
+                                    lg:w-32
+                                    lg:h-32
+                                    viewBox="0 0 32 32"
+                                    fill="none"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                >
                                     <path
                                         d="M20.7081 19.0346H19.6241C19.3268 19.0346 19.0548 19.2026 18.9228 19.468L17.9214 21.4706C17.7774 21.76 17.3641 21.76 17.2201 21.4706L14.7708 16.5706C14.6281 16.2866 14.2254 16.28 14.0748 16.56L12.9601 18.6226C12.8228 18.876 12.5574 19.0346 12.2694 19.0346H11.2921"
                                         stroke="white"
@@ -59,13 +67,13 @@ const Home = () => {
                             </Link>
                         </div>
 
-                        <div className="grid  lg:grid-cols-2  gap-5">
+                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-5">
                             <AudioCard podcast={podcasts[podcasts.length - 1]} index={podcasts.length - 1} />
                             <AudioCard podcast={podcasts[podcasts.length - 2]} index={podcasts.length - 2} />
                         </div>
                     </div>
-                    <div className="container mx-auto p-15">
-                        <h1 className="text-3xl font-bold mb-4 text-[#494D4B]">Todos os episódios</h1>
+                    <div className="container mx-auto p-4 lg:p-15">
+                        <h1 className="text-2xl lg:text-3xl font-bold mb-4 text-[#494D4B]">Todos os episódios</h1>
                         <AudioTable />
                     </div>
                 </div>
